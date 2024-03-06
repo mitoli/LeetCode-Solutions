@@ -524,7 +524,8 @@ func reverseKGroup(head *ListNode, k int) *ListNode {
         groupNext := kth.Next
 
         // reverse current group
-        prev, curr := kth.Next, groupPrev.Next
+        curr := groupPrev.Next
+        prev := kth.Next
         for curr != groupNext {
             tmp := curr.Next
             curr.Next = prev

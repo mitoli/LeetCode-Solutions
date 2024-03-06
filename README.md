@@ -524,8 +524,8 @@ func reverseKGroup(head *ListNode, k int) *ListNode {
 		groupNext := kth.Next
 
 		// reverse current group
+        prev := groupNext
 		curr := groupPrev.Next
-		prev := groupNext
 		for curr != groupNext {
 			tmp := curr.Next
 			curr.Next = prev
@@ -1524,15 +1524,15 @@ func numIslands(grid [][]byte) int {
  * }
  */
 func reverseList(head *ListNode) *ListNode {
-    var prev *ListNode = nil
-    curr := head
-    for curr != nil {
-        next := curr.Next
-        curr.Next = prev
-        prev = curr
-        curr = next
-    }
-    return prev
+	var prev *ListNode = nil
+	curr := head
+	for curr != nil {
+		tmp := curr.Next
+		curr.Next = prev
+		prev = curr
+		curr = tmp
+	}
+	return prev
 }
 ```
 

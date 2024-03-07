@@ -233,6 +233,39 @@ func expandAroundCenter(s string, i int, j int) (int, int) {
 
 
 
+```c++
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int p = 0;
+        int q = 0;
+        for (int i = 0; i < s.length(); i++) {
+            auto [p1, q1] = expandAroundCenter(s, i, i);
+            auto [p2, q2] = expandAroundCenter(s, i, i + 1);
+            if (q1 - p1 > q - p) {
+                p = p1;
+                q = q1;
+            }
+            if (q2 - p2 > q - p) {
+                p = p2;
+                q = q2;
+            }
+        }
+        return s.substr(p, q - p + 1);
+    }
+
+    tuple<int, int> expandAroundCenter(string& s, int i, int j) {
+        while (i >= 0 && j < s.length() && s[i] == s[j]) {
+            i--;
+            j++;
+        }
+        return {i + 1, j - 1};
+    }
+};
+```
+
+
+
 ### 8. [String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/) 
 
 

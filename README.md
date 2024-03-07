@@ -18,6 +18,25 @@ func twoSum(nums []int, target int) []int {
 
 
 
+```c++
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> mp;
+        for (int i = 0; i < nums.size(); i++) {
+            int remaining = target - nums[i];
+            if (mp.contains(remaining)) {
+                return {mp.at(remaining), i};
+            }
+            mp[nums[i]] = i;
+        }
+        return {};
+    }
+};
+```
+
+
+
 ### 2. [Add Two Numbers](https://leetcode.com/problems/add-two-numbers/) 
 
 
@@ -55,6 +74,47 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 
 
 
+```c++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode* next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode* next) : val(x), next(next) {}
+ * };
+ 
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode dummy;
+        ListNode* tail = &dummy;
+        int carry = 0;
+        while (l1 != nullptr || l2 != nullptr || carry != 0) {
+            int v1 = 0;
+            int v2 = 0;
+            if (l1 != nullptr) {
+                v1 = l1->val;
+                l1 = l1->next;
+            }
+            if (l2 != nullptr) {
+                v2 = l2->val;
+                l2 = l2->next;
+            }
+            int sum = v1 + v2 + carry;
+            carry = sum / 10;
+            tail->next = new ListNode(sum % 10);
+            tail = tail->next;
+        }
+        return dummy.next;
+    }
+};
+```
+
+
+
 ### 3. [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) 
 
 
@@ -73,6 +133,27 @@ func lengthOfLongestSubstring(s string) int {
     }
     return ans
 }
+```
+
+
+
+```c++
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_map<int, int> mp;
+        int left = 0;
+        int ans = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (mp.contains(s[i])) {
+                left = max(left, mp.at(s[i]) + 1);
+            }
+            mp[s[i]] = i;
+            ans = max(ans, i - left + 1);
+        }
+        return ans;
+    }
+};
 ```
 
 
@@ -227,31 +308,65 @@ func maxArea(height []int) int {
 
 ```go
 func threeSum(nums []int) [][]int {
-    n := len(nums)
-    sort.Ints(nums)
-    ans := [][]int{}
-    for i := 0; i < n; i++ {
-        if i > 0 && nums[i] == nums[i-1] {
-            continue
-        }
-        k := n - 1
-        for j := i + 1; j < n; j++ {
-            if j > i + 1 && nums[j] == nums[j-1] {
-                continue
-            }
-            for j < k && nums[i] + nums[j] + nums[k] > 0 {
-                k--
-            }
-            if j == k {
-                break
-            }
-            if nums[i] + nums[j] + nums[k] == 0 {
-                ans = append(ans, []int{nums[i], nums[j], nums[k]})
-            }
-        }
-    }
-    return ans
+	n := len(nums)
+	sort.Ints(nums)
+	ans := [][]int{}
+	for i := 0; i < n; i++ {
+		if i > 0 && nums[i] == nums[i-1] {
+			continue
+		}
+		k := n - 1
+		for j := i + 1; j < n; j++ {
+			if j > i+1 && nums[j] == nums[j-1] {
+				continue
+			}
+			for j < k && nums[i]+nums[j]+nums[k] > 0 {
+				k--
+			}
+			if j == k {
+				break
+			}
+			if nums[i]+nums[j]+nums[k] == 0 {
+				ans = append(ans, []int{nums[i], nums[j], nums[k]})
+			}
+		}
+	}
+	return ans
 }
+```
+
+
+
+```c++
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> ans;
+        for (int i = 0; i < n; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            int k = n - 1;
+            for (int j = i + 1; j < n; j++) {
+                if (j > i + 1 && nums[j] == nums[j - 1]) {
+                    continue;
+                }
+                while (j < k && nums[i] + nums[j] + nums[k] > 0) {
+                    k--;
+                }
+                if (j == k) {
+                    break;
+                }
+                if (nums[i] + nums[j] + nums[k] == 0) {
+                    ans.push_back({nums[i], nums[j], nums[k]});
+                }
+            }
+        }
+        return ans;
+    }
+};
 ```
 
 
@@ -1171,6 +1286,55 @@ func zigzagLevelOrder(root *TreeNode) [][]int {
 
 
 
+```c++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode* left;
+ *     TreeNode* right;
+ *     TreeNode(): val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x): val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode* left, TreeNode* right): val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        if (root == nullptr) {
+            return {};
+        }
+        vector<vector<int>> ans;
+        queue<TreeNode*> q;
+        q.push(root);
+        bool leftToRight = true;
+        while (!q.empty()) {
+            int n = q.size();
+            vector<int> row(n);
+            for (int i = 0; i < n; i++) {
+                TreeNode* node = q.front();
+                q.pop();
+                int index = leftToRight ? i : (n - 1 - i);
+                row[index] = node->val;
+                if (node->left != nullptr) {
+                    q.push(node->left);
+                }
+                if (node->right != nullptr) {
+                    q.push(node->right);
+                }
+            }
+            leftToRight = !leftToRight;
+            ans.push_back(row);
+        }
+        return ans;
+    }
+};
+```
+
+
+
+
+
 ### 121. [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) 
 
 
@@ -1388,6 +1552,90 @@ func (this *LRUCache) remove(node *Node) {
 
 
 
+```c++
+struct Node {
+    int key;
+    int value;
+    Node* prev;
+    Node* next;
+    Node(int key, int value) : key(key), value(value) {}
+};
+
+class LRUCache {
+public:
+    LRUCache(int capacity) : keys(unordered_map<int, Node*>()), capacity(capacity), head(nullptr), tail(nullptr) {}
+
+    int get(int key) {
+        if (keys.contains(key)) {
+            Node* node = keys.at(key);
+            remove(node);
+            add(node);
+            return node->value;
+        }
+        return -1;
+    }
+
+    void put(int key, int value) {
+        if (keys.contains(key)) {
+            Node* node = keys.at(key);
+            remove(node);
+            node->value = value;
+            add(node);
+            return;
+        }
+        Node* node = new Node(key, value);
+        keys[key] = node;
+        add(node);
+        if (keys.size() > capacity) {
+            keys.erase(tail->key);
+            remove(tail);
+        }
+    }
+
+private:
+    unordered_map<int, Node*> keys;
+    Node* head;
+    Node* tail;
+    int capacity;
+
+    void add(Node* node) {
+        node->prev = nullptr;
+        node->next = head;
+        if (head != nullptr) {
+            head->prev = node;
+        }
+        head = node;
+        if (tail == nullptr) {
+            tail = node;
+        }
+    }
+
+    void remove(Node* node) {
+        if (node == head) {
+            head = node->next;
+        }
+        if (node == tail) {
+            tail = node->prev;
+        }
+        if (node->prev != nullptr) {
+            node->prev->next = node->next;
+        }
+        if (node->next != nullptr) {
+            node->next->prev = node->prev;
+        }
+    }
+};
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
+```
+
+
+
 ### 160. [Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/) 
 
 
@@ -1576,6 +1824,171 @@ func partition(nums []int, p int, r int) int {
     return i + 1
 }
 ```
+
+
+
+```go
+func findKthLargest(nums []int, k int) int {
+	n := len(nums)
+	return quickSelect(nums, 0, n-1, n-k)
+}
+
+func quickSelect(nums []int, lo int, hi int, k int) int {
+	for lo < hi {
+		pivot := partition(nums, lo, hi)
+		if pivot < k {
+			lo = pivot + 1
+		} else if pivot > k {
+			hi = pivot - 1
+		} else {
+			break
+		}
+	}
+	return nums[k]
+}
+
+func partition(nums []int, lo int, hi int) int {
+	i, j := lo, hi+1
+	for {
+		for i++; i < hi && nums[i] < nums[lo]; i++ {
+		}
+		for j--; j > lo && nums[lo] < nums[j]; j-- {
+		}
+		if i >= j {
+			break
+		}
+		nums[i], nums[j] = nums[j], nums[i]
+	}
+	nums[lo], nums[j] = nums[j], nums[lo]
+	return j
+}
+```
+
+
+
+```go
+func findKthLargest(nums []int, k int) int {
+	n := len(nums)
+	return quickselect(nums, 0, n-1, n-k)
+}
+
+func quickselect(nums []int, l, r, k int) int {
+	if l == r {
+		return nums[k]
+	}
+
+	partition := nums[l]
+	i := l - 1
+	j := r + 1
+
+	for i < j {
+        i++
+        for nums[i] < partition {
+            i++
+        }
+
+        j--
+		for nums[j] > partition {
+            j--
+		}
+
+		if i < j {
+			nums[i], nums[j] = nums[j], nums[i]
+		}
+	}
+
+	if k <= j {
+		return quickselect(nums, l, j, k)
+	} else {
+		return quickselect(nums, j+1, r, k)
+	}
+}
+```
+
+
+
+```c++
+class Solution {
+public:
+    int quickselect(vector<int>& nums, int l, int r, int k) {
+        if (l == r) {
+            return nums[k];
+        }
+        int partition = nums[l], i = l - 1, j = r + 1;
+        while (i < j) {
+            do {
+                i++;
+            } while (nums[i] < partition);
+            do {
+                j--;
+            } while (nums[j] > partition);
+            if (i < j) {
+                swap(nums[i], nums[j]);
+            }
+        }
+        if (k <= j) {
+            return quickselect(nums, l, j, k);
+        } else {
+            return quickselect(nums, j + 1, r, k);
+        }
+    }
+
+    int findKthLargest(vector<int>& nums, int k) {
+        int n = nums.size();
+        return quickselect(nums, 0, n - 1, n - k);
+    }
+};
+
+```
+
+
+
+
+
+```go
+func findKthLargest(nums []int, k int) int {
+	return quickSelect(nums, 0, len(nums)-1, len(nums)-k)
+}
+
+func quickSelect(nums []int, p int, r int, idx int) int {
+	lt, gt := randomizedThreePartition(nums, p, r)
+	if idx < lt {
+		return quickSelect(nums, p, lt, idx)
+	} else if idx > gt {
+		return quickSelect(nums, gt, r, idx)
+	} else {
+		return nums[lt]
+	}
+}
+
+func randomizedThreePartition(nums []int, p int, r int) (int, int) {
+	i := rand.Intn(r-p+1) + p
+	nums[i], nums[r] = nums[r], nums[i]
+	return threeWayPartition(nums, p, r)
+}
+
+func threeWayPartition(nums []int, p int, r int) (int, int) {
+	lt, gt := p-1, r
+	pivot := nums[r]
+	i := p
+	for i < gt {
+		if nums[i] < pivot {
+			lt++
+			nums[i], nums[lt] = nums[lt], nums[i]
+			i++
+		} else if nums[i] > pivot {
+			gt--
+			nums[i], nums[gt] = nums[gt], nums[i]
+		} else {
+			i++
+		}
+	}
+	nums[r], nums[gt] = nums[gt], nums[r]
+	return lt, gt + 1
+}
+```
+
+
 
 
 

@@ -89,8 +89,8 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode dummy;
-        ListNode* tail = &dummy;
+        ListNode* dummy = new ListNode();
+        ListNode* tail = dummy;
         int carry = 0;
         while (l1 != nullptr || l2 != nullptr || carry != 0) {
             int v1 = 0;
@@ -108,7 +108,7 @@ public:
             tail->next = new ListNode(sum % 10);
             tail = tail->next;
         }
-        return dummy.next;
+        return dummy->next;
     }
 };
 ```
@@ -769,15 +769,15 @@ func getKth(curr *ListNode, k int) *ListNode {
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
-        ListNode dummy(0, head);
-        ListNode* predecessor = &dummy;
-        ListNode* tail = &dummy;
+        ListNode* dummy = new ListNode(0, head);
+        ListNode* predecessor = dummy;
+        ListNode* tail = dummy;
 
         while (true) {
             for (int i = 0; i < k; i++) {
                 tail = tail->next;
                 if (tail == nullptr) {
-                    return dummy.next;
+                    return dummy->next;
                 }
             }
             ListNode* head = predecessor->next;
@@ -876,8 +876,6 @@ public:
 
 
 
-
-
 ### 32. [Longest Valid Parentheses](https://leetcode.com/problems/longest-valid-parentheses/) 
 
 
@@ -972,8 +970,6 @@ public:
     }
 };
 ```
-
-
 
 
 
@@ -1081,24 +1077,22 @@ public:
     int trap(vector<int>& height) {
         int i = 0;
         int j = height.size() - 1;
-        int left_max = 0;
-        int right_max = 0;
+        int leftMax = 0;
+        int rightMax = 0;
         int ans = 0;
         while (i < j) {
-            left_max = max(left_max, height[i]);
-            right_max = max(right_max, height[j]);
+            leftMax = max(leftMax, height[i]);
+            rightMax = max(rightMax, height[j]);
             if (height[i] < height[j]) {
-                ans += left_max - height[i++];
+                ans += leftMax - height[i++];
             } else {
-                ans += right_max - height[j--];
+                ans += rightMax - height[j--];
             }
         }
         return ans;
     }
 };
 ```
-
-
 
 
 
@@ -1267,8 +1261,6 @@ public:
 
 
 
-
-
 ### 54. [Spiral Matrix](https://leetcode.com/problems/spiral-matrix/) 
 
 
@@ -1336,8 +1328,6 @@ public:
     }
 };
 ```
-
-
 
 
 
@@ -1630,8 +1620,6 @@ public:
 
 
 
-
-
 ### 121. [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) 
 
 
@@ -1654,11 +1642,11 @@ func maxProfit(prices []int) int {
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        int min_price = INT_MAX;
-        int max_profit = 0;
+        int minPrice = INT_MAX;
+        int maxProfit = 0;
         for (int price : prices) {
-            max_profit = max(max_profit, price - min_price);
-            min_price = min(min_price, price);
+            maxProfit = max(maxProfit, price - minPrice);
+            minPrice = min(minPrice, price);
         }
         return max_profit;
     }
@@ -2006,8 +1994,6 @@ public:
 
 
 
-
-
 ### 200. [Number of Islands](https://leetcode.com/problems/number-of-islands/) 
 
 
@@ -2081,7 +2067,6 @@ public:
     void dfs(vector<vector<char>>& grid, int r, int c) {
         int nr = grid.size();
         int nc = grid[0].size();
-
         grid[r][c] = '0';
         if (r - 1 >= 0 && grid[r - 1][c] == '1') {
             dfs(grid, r - 1, c);
@@ -2097,56 +2082,6 @@ public:
         }
     }
 };
-```
-
-
-
-
-
-```go
-func numIslands(grid [][]byte) int {
-    nr := len(grid)
-    if nr == 0 {
-        return 0
-    }
-    nc := len(grid[0])
-
-    ans := 0
-    for r := 0; r < nr; r++ {
-        for c := 0; c < nc; c++ {
-            if grid[r][c] == '1' {
-                ans++
-                grid[r][c] = '0'
-                queue := [][]int{}
-                queue = append(queue, []int{r, c})
-                for len(queue) != 0 {
-                    rc := queue[0]
-                    row := rc[0]
-                    col := rc[1]
-                    queue = queue[1:]
-                    if row - 1 >= 0 && grid[row - 1][col] == '1' {
-                        queue = append(queue, []int{row - 1, col})
-                        grid[row - 1][col] = '0'
-                    }
-                    if row + 1 <= nr - 1 && grid[row + 1][col] == '1' {
-                        queue = append(queue, []int{row + 1, col})
-                        grid[row + 1][col] = '0'
-                    }
-                    if col - 1 >= 0 && grid[row][col - 1] == '1' {
-                        queue = append(queue, []int{row, col - 1})
-                        grid[row][col - 1] = '0'
-                    }
-                    if col + 1 <= nc - 1 && grid[row][col + 1] == '1' {
-                        queue = append(queue, []int{row, col + 1})
-                        grid[row][col + 1] = '0'
-                    }
-                }
-            }
-        }
-    }
-
-    return ans
-}
 ```
 
 
@@ -2533,8 +2468,6 @@ public:
     }
 };
 ```
-
-
 
 
 

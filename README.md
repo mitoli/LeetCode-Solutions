@@ -700,6 +700,60 @@ func getKth(curr *ListNode, k int) *ListNode {
 
 
 
+```c++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode* next;
+ *     ListNode(): val(0), next(nullptr) {}
+ *     ListNode(int x): val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode* next): val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        ListNode dummy(0, head);
+        ListNode* predecessor = &dummy;
+        ListNode* tail = &dummy;
+
+        while (true) {
+            for (int i = 0; i < k; i++) {
+                tail = tail->next;
+                if (tail == nullptr) {
+                    return dummy.next;
+                }
+            }
+            ListNode* head = predecessor->next;
+            ListNode* successor = tail->next;
+            tail->next = nullptr;
+            predecessor->next = reverseList(head);
+            head->next = successor;
+            predecessor = head;
+            tail = head;
+        }
+
+        return nullptr;
+    }
+
+private:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* prev = nullptr;
+        ListNode* curr = head;
+        while (curr != nullptr) {
+            ListNode* next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+};
+```
+
+
+
 ### 31. [Next Permutation](https://leetcode.com/problems/next-permutation/) 
 
 
@@ -1386,6 +1440,25 @@ func maxProfit(prices []int) int {
 
 
 
+```c++
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int min_price = INT_MAX;
+        int max_profit = 0;
+        for (int price : prices) {
+            max_profit = max(max_profit, price - min_price);
+            min_price = min(min_price, price);
+        }
+        return max_profit;
+    }
+};
+```
+
+
+
+
+
 ### 141. [Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/) 
 
 
@@ -1506,73 +1579,73 @@ public:
 
 ```go
 type Node struct {
-    Key, Value int
-    Prev, Next *Node
+	Key, Value int
+	Prev, Next *Node
 }
 
 type LRUCache struct {
-    keys map[int]*Node
-    head, tail *Node
-    capacity int
+	keys       map[int]*Node
+	head, tail *Node
+	capacity   int
 }
 
 func Constructor(capacity int) LRUCache {
-    return LRUCache{
-        keys: make(map[int]*Node),
-        capacity: capacity,
-    }
+	return LRUCache{
+		keys:     make(map[int]*Node),
+		capacity: capacity,
+	}
 }
 
 func (this *LRUCache) Get(key int) int {
-    if node, ok := this.keys[key]; ok {
-        this.remove(node)
-        this.add(node)
-        return node.Value
-    }
-    return -1
+	if node, ok := this.keys[key]; ok {
+		this.remove(node)
+		this.add(node)
+		return node.Value
+	}
+	return -1
 }
 
-func (this *LRUCache) Put(key int, value int)  {
-    if node, ok := this.keys[key]; ok {
-        this.remove(node)
-        node.Value = value
-        this.add(node)
-        return
-    }
-    node := &Node{Key: key, Value: value}
-    this.keys[key] = node
-    this.add(node)
-    if len(this.keys) > this.capacity {
-        delete(this.keys, this.tail.Key)
-        this.remove(this.tail)
-    }
+func (this *LRUCache) Put(key int, value int) {
+	if node, ok := this.keys[key]; ok {
+		this.remove(node)
+		node.Value = value
+		this.add(node)
+		return
+	}
+	node := &Node{Key: key, Value: value}
+	this.keys[key] = node
+	this.add(node)
+	if len(this.keys) > this.capacity {
+		delete(this.keys, this.tail.Key)
+		this.remove(this.tail)
+	}
 }
 
 func (this *LRUCache) add(node *Node) {
-    node.Prev = nil
-    node.Next = this.head
-    if this.head != nil {
-        this.head.Prev = node
-    }
-    this.head = node
-    if this.tail == nil {
-        this.tail = node
-    }
+	node.Prev = nil
+	node.Next = this.head
+	if this.head != nil {
+		this.head.Prev = node
+	}
+	this.head = node
+	if this.tail == nil {
+		this.tail = node
+	}
 }
 
 func (this *LRUCache) remove(node *Node) {
-    if node == this.head {
-        this.head = node.Next
-    }
-    if node == this.tail {
-        this.tail = node.Prev
-    }
-    if node.Prev != nil {
-        node.Prev.Next = node.Next
-    }
-    if node.Next != nil {
-        node.Next.Prev = node.Prev
-    }
+	if node.Prev != nil {
+		node.Prev.Next = node.Next
+	}
+	if node.Next != nil {
+		node.Next.Prev = node.Prev
+	}
+	if node == this.head {
+		this.head = node.Next
+	}
+	if node == this.tail {
+		this.tail = node.Prev
+	}
 }
 
 /**
@@ -1644,17 +1717,17 @@ private:
     }
 
     void remove(Node* node) {
-        if (node == head) {
-            head = node->next;
-        }
-        if (node == tail) {
-            tail = node->prev;
-        }
         if (node->prev != nullptr) {
             node->prev->next = node->next;
         }
         if (node->next != nullptr) {
             node->next->prev = node->prev;
+        }
+        if (node == head) {
+            head = node->next;
+        }
+        if (node == tail) {
+            tail = node->prev;
         }
     }
 };
@@ -1744,6 +1817,54 @@ func dfs(grid [][]byte, r int, c int) {
 
 
 
+```c++
+class Solution {
+public:
+    int numIslands(vector<vector<char>>& grid) {
+        int nr = grid.size();
+        if (nr == 0) {
+            return 0;
+        }
+        int nc = grid[0].size();
+
+        int ans = 0;
+        for (int r = 0; r < nr; r++) {
+            for (int c = 0; c < nc; c++) {
+                if (grid[r][c] == '1') {
+                    ans++;
+                    dfs(grid, r, c);
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    void dfs(vector<vector<char>>& grid, int r, int c) {
+        int nr = grid.size();
+        int nc = grid[0].size();
+
+        grid[r][c] = '0';
+        if (r - 1 >= 0 && grid[r - 1][c] == '1') {
+            dfs(grid, r - 1, c);
+        }
+        if (r + 1 < nr && grid[r + 1][c] == '1') {
+            dfs(grid, r + 1, c);
+        }
+        if (c - 1 >= 0 && grid[r][c - 1] == '1') {
+            dfs(grid, r, c - 1);
+        }
+        if (c + 1 < nc && grid[r][c + 1] == '1') {
+            dfs(grid, r, c + 1);
+        }
+    }
+};
+```
+
+
+
+
+
 ```go
 func numIslands(grid [][]byte) int {
     nr := len(grid)
@@ -1815,6 +1936,35 @@ func reverseList(head *ListNode) *ListNode {
 	}
 	return prev
 }
+```
+
+
+
+```c++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* prev = nullptr;
+        ListNode* curr = head;
+        while (curr != nullptr) {
+            ListNode* next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+};
 ```
 
 
@@ -1943,35 +2093,36 @@ func quickselect(nums []int, l, r, k int) int {
 ```c++
 class Solution {
 public:
-    int quickselect(vector<int>& nums, int l, int r, int k) {
-        if (l == r) {
-            return nums[k];
-        }
-        int partition = nums[l], i = l - 1, j = r + 1;
-        while (i < j) {
-            do {
-                i++;
-            } while (nums[i] < partition);
-            do {
-                j--;
-            } while (nums[j] > partition);
-            if (i < j) {
-                swap(nums[i], nums[j]);
-            }
-        }
-        if (k <= j) {
-            return quickselect(nums, l, j, k);
-        } else {
-            return quickselect(nums, j + 1, r, k);
-        }
-    }
-
     int findKthLargest(vector<int>& nums, int k) {
         int n = nums.size();
         return quickselect(nums, 0, n - 1, n - k);
     }
-};
 
+    int quickselect(vector<int>& nums, int l, int r, int kthSmallest) {
+        if (l == r) {
+            return nums[kthSmallest];
+        }
+        int pivot = nums[l];
+        int i = l - 1;
+        int j = r + 1;
+        while (i < j) {
+            do {
+                i++;
+            } while (nums[i] < pivot);
+            do {
+                j--;
+            } while (nums[j] > pivot);
+            if (i < j) {
+                swap(nums[i], nums[j]);
+            }
+        }
+        if (kthSmallest <= j) {
+            return quickselect(nums, l, j, kthSmallest);
+        } else {
+            return quickselect(nums, j + 1, r, kthSmallest);
+        }
+    }
+};
 ```
 
 

@@ -789,6 +789,40 @@ func reverse(nums []int, i int, j int) {
 
 
 
+```c++
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int n = nums.size();
+
+        int i = n - 2;
+        while (i >= 0 && nums[i] >= nums[i + 1]) {
+            i--;
+        }
+
+        if (i >= 0) {
+            int j = n - 1;
+            while (j >= 0 && nums[j] <= nums[i]) {
+                j--;
+            }
+            swap(nums[i], nums[j]);
+        }
+
+        reverse(nums, i + 1, n - 1);
+    }
+
+    void reverse(vector<int>& nums, int i, int j) {
+        while (i < j) {
+            swap(nums[i++], nums[j--]);
+        }
+    }
+};
+```
+
+
+
+
+
 ### 32. [Longest Valid Parentheses](https://leetcode.com/problems/longest-valid-parentheses/) 
 
 
@@ -848,6 +882,43 @@ func search(nums []int, target int) int {
     return -1
 }
 ```
+
+
+
+```c++
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int n = nums.size();
+        int left = 0;
+        int right = n - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (nums[mid] == target) {
+                return mid;
+            }
+            if (nums[left] <= nums[mid]) { // [left, mid] 有序
+                // 可以判断 target 是否在 [left, mid) 区间
+                if (nums[left] <= target && target < nums[mid]) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            } else { // [mid, right] 有序
+                // 可以判断 target 是否在 (mid, right] 区间
+                if (nums[mid] < target && target <= nums[right]) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+        }
+        return -1;
+    }
+};
+```
+
+
 
 
 
@@ -946,6 +1017,33 @@ func trap(height []int) int {
     return res
 }
 ```
+
+
+
+```c++
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int i = 0;
+        int j = height.size() - 1;
+        int left_max = 0;
+        int right_max = 0;
+        int ans = 0;
+        while (i < j) {
+            left_max = max(left_max, height[i]);
+            right_max = max(right_max, height[j]);
+            if (height[i] < height[j]) {
+                ans += left_max - height[i++];
+            } else {
+                ans += right_max - height[j--];
+            }
+        }
+        return ans;
+    }
+};
+```
+
+
 
 
 
@@ -1094,6 +1192,28 @@ func maxSubArray(nums []int) int {
 
 
 
+```c++
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int sum = 0;
+        int ans = INT_MIN;
+        for (int i = 0; i < nums.size(); i++) {
+            sum += nums[i];
+            ans = max(ans, sum);
+            if (sum < 0) {
+                sum = 0;
+            }
+        }
+        return ans;
+    }
+};
+```
+
+
+
+
+
 ### 54. [Spiral Matrix](https://leetcode.com/problems/spiral-matrix/) 
 
 
@@ -1113,7 +1233,7 @@ func spiralOrder(matrix [][]int) []int {
         dir = [][]int{[]int{0, 1}, []int{1, 0}, []int{0, -1}, []int{-1, 0}}
         dirIdx = 0
     )
-
+.
     for i := 0; i < total; i++ {
         order[i] = matrix[r][c]
         visited[r][c] = true
@@ -1128,6 +1248,41 @@ func spiralOrder(matrix [][]int) []int {
     return order
 }
 ```
+
+
+
+```c++
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        int nr = matrix.size();
+        int nc = matrix[0].size();
+        vector<vector<bool>> visited(nr, vector<bool>(nc, false));
+        int n = nr * nc;
+        vector<int> ans(n);
+        int r = 0;
+        int c = 0;
+        vector<vector<int>> dir = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int dirIdx = 0;
+
+        for (int i = 0; i < n; i++) {
+            ans[i] = matrix[r][c];
+            visited[r][c] = true;
+            int nextR = r + dir[dirIdx][0];
+            int nextC = c + dir[dirIdx][1];
+            if (nextR < 0 || nextR >= nr || nextC < 0 || nextC >= nc || visited[nextR][nextC]) {
+                dirIdx = (dirIdx + 1) % 4;
+            }
+            r += dir[dirIdx][0];
+            c += dir[dirIdx][1];
+        }
+
+        return ans;
+    }
+};
+```
+
+
 
 
 
@@ -1457,8 +1612,6 @@ public:
 
 
 
-
-
 ### 141. [Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/) 
 
 
@@ -1767,6 +1920,36 @@ func getIntersectionNode(headA, headB *ListNode) *ListNode {
     return nil
 }
 ```
+
+
+
+```c++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        unordered_map<ListNode*, bool> visited;
+        for (ListNode* tmp = headA; tmp != nullptr; tmp = tmp->next) {
+            visited[tmp] = true;
+        }
+        for (ListNode* tmp = headB; tmp != nullptr; tmp = tmp->next) {
+            if (visited[tmp]) {
+                return tmp;
+            }
+        }
+        return nullptr;
+    }
+};
+```
+
+
 
 
 
@@ -2264,6 +2447,39 @@ func right(i int) int {
      return root
 }
 ```
+
+
+
+```c++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if (root == nullptr || root == p || root == q) {
+            return root;
+        }
+        TreeNode* left = lowestCommonAncestor(root->left, p, q);
+        TreeNode* right = lowestCommonAncestor(root->right, p, q);
+        if (left == nullptr) {
+            return right;
+        }
+        if (right == nullptr) {
+            return left;
+        }
+        return root;
+    }
+};
+```
+
+
 
 
 

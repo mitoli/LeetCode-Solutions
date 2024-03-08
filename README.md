@@ -664,8 +664,6 @@ public:
 
 
 
-
-
 ### 24. [Swap Nodes in Pairs](https://leetcode.com/problems/swap-nodes-in-pairs/) 
 
 
@@ -917,14 +915,18 @@ func search(nums []int, target int) int {
             return mid
         }
 
-        if nums[l] <= nums[mid] { // nums[l:mid+1]有序
-            if target >= nums[l] && target < nums[mid] { // 可以判断target是否在nums[l:mid+1]
+        if nums[l] <= nums[mid] {
+            // nums[l:mid+1]有序
+            // 可以判断target是否在nums[l:mid+1]
+            if target >= nums[l] && target < nums[mid] {
                 r = mid - 1
             } else {
                 l = mid + 1
             }
-        } else { // nums[mid+1:r+1]有序
-            if target > nums[mid] && target <= nums[r] { // 可以判断target是否在nums[mid+1:r+1]
+        } else {
+            // nums[mid+1:r+1]有序
+            // 可以判断target是否在nums[mid+1:r+1]
+            if target > nums[mid] && target <= nums[r] {
                 l = mid + 1
             } else {
                 r = mid - 1
@@ -950,14 +952,16 @@ public:
             if (nums[mid] == target) {
                 return mid;
             }
-            if (nums[left] <= nums[mid]) { // [left, mid] 有序
+            if (nums[left] <= nums[mid]) {
+                // [left, mid] 有序
                 // 可以判断 target 是否在 [left, mid) 区间
                 if (nums[left] <= target && target < nums[mid]) {
                     right = mid - 1;
                 } else {
                     left = mid + 1;
                 }
-            } else { // [mid, right] 有序
+            } else {
+                // [mid, right] 有序
                 // 可以判断 target 是否在 (mid, right] 区间
                 if (nums[mid] < target && target <= nums[right]) {
                     left = mid + 1;
@@ -1977,7 +1981,7 @@ func getIntersectionNode(headA, headB *ListNode) *ListNode {
  */
 class Solution {
 public:
-    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+    ListNode* getIntersectionNode(ListNode *headA, ListNode *headB) {
         unordered_map<ListNode*, bool> visited;
         for (ListNode* tmp = headA; tmp != nullptr; tmp = tmp->next) {
             visited[tmp] = true;
@@ -2148,48 +2152,12 @@ public:
 
 ```go
 func findKthLargest(nums []int, k int) int {
-    return quickSelect(nums, 0, len(nums) - 1, k - 1)
+    return quickSelect(nums, len(nums)-k)
 }
 
-func quickSelect(nums []int, p int, r int, index int) int {
-    q := randomizedPartition(nums, p, r)
-    if index == q {
-        return nums[q]
-    } else if index < q {
-        return quickSelect(nums, p, q - 1, index)
-    } else {
-        return quickSelect(nums, q + 1, r, index)
-    }
-}
-
-func randomizedPartition(nums []int, p int, r int) int {
-    i := rand.Intn(r - p + 1) + p
-    nums[i], nums[r] = nums[r], nums[i]
-    return partition(nums, p, r)
-}
-
-func partition(nums []int, p int, r int) int {
-    i := p - 1
-    for j := p; j < r; j++ {
-        if nums[j] >= nums[r] {
-            i += 1
-            nums[i], nums[j] = nums[j], nums[i]
-        }
-    }
-    nums[i + 1], nums[r] = nums[r], nums[i + 1]
-    return i + 1
-}
-```
-
-
-
-```go
-func findKthLargest(nums []int, k int) int {
-	n := len(nums)
-	return quickSelect(nums, 0, n-1, n-k)
-}
-
-func quickSelect(nums []int, lo int, hi int, k int) int {
+func quickSelect(nums []int, k int) int {
+    lo := 0
+    hi := len(nums) - 1
 	for lo < hi {
 		pivot := partition(nums, lo, hi)
 		if pivot < k {
@@ -2223,188 +2191,47 @@ func partition(nums []int, lo int, hi int) int {
 
 
 ```go
-func findKthLargest(nums []int, k int) int {
-	n := len(nums)
-	return quickselect(nums, 0, n-1, n-k)
-}
-
-func quickselect(nums []int, l, r, k int) int {
-	if l == r {
-		return nums[k]
-	}
-
-	partition := nums[l]
-	i := l - 1
-	j := r + 1
-
-	for i < j {
-        i++
-        for nums[i] < partition {
-            i++
-        }
-
-        j--
-		for nums[j] > partition {
-            j--
-		}
-
-		if i < j {
-			nums[i], nums[j] = nums[j], nums[i]
-		}
-	}
-
-	if k <= j {
-		return quickselect(nums, l, j, k)
-	} else {
-		return quickselect(nums, j+1, r, k)
-	}
-}
-```
-
-
-
-```c++
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
-        int n = nums.size();
-        return quickselect(nums, 0, n - 1, n - k);
+        return quickSelect(nums, nums.size() - k);
     }
 
-    int quickselect(vector<int>& nums, int l, int r, int kthSmallest) {
-        if (l == r) {
-            return nums[kthSmallest];
-        }
-        int pivot = nums[l];
-        int i = l - 1;
-        int j = r + 1;
-        while (i < j) {
-            do {
-                i++;
-            } while (nums[i] < pivot);
-            do {
-                j--;
-            } while (nums[j] > pivot);
-            if (i < j) {
-                swap(nums[i], nums[j]);
+    int quickSelect(vector<int>& nums, int k) {
+        int lo = 0;
+        int hi = nums.size() - 1;
+        while (lo < hi) {
+            int pivot = partition(nums, lo, hi);
+            if (k > pivot) {
+                lo = pivot + 1;
+            } else if (k < pivot) {
+                hi = pivot - 1;
+            } else {
+                break;
             }
         }
-        if (kthSmallest <= j) {
-            return quickselect(nums, l, j, kthSmallest);
-        } else {
-            return quickselect(nums, j + 1, r, kthSmallest);
+        return nums[k];
+    }
+
+    int partition(vector<int>& nums, int lo, int hi) {
+        int i = lo;
+        int j = hi + 1;
+        while (true) {
+            do {
+                i++;
+            } while (i < hi && nums[i] < nums[lo]);
+            do {
+                j--;
+            } while (j > lo && nums[j] > nums[lo]);
+            if (i >= j) {
+                break;
+            }
+            swap(nums[i], nums[j]);
         }
+        swap(nums[lo], nums[j]);
+        return j;
     }
 };
-```
-
-
-
-
-
-```go
-func findKthLargest(nums []int, k int) int {
-	return quickSelect(nums, 0, len(nums)-1, len(nums)-k)
-}
-
-func quickSelect(nums []int, p int, r int, idx int) int {
-	lt, gt := randomizedThreePartition(nums, p, r)
-	if idx < lt {
-		return quickSelect(nums, p, lt, idx)
-	} else if idx > gt {
-		return quickSelect(nums, gt, r, idx)
-	} else {
-		return nums[lt]
-	}
-}
-
-func randomizedThreePartition(nums []int, p int, r int) (int, int) {
-	i := rand.Intn(r-p+1) + p
-	nums[i], nums[r] = nums[r], nums[i]
-	return threeWayPartition(nums, p, r)
-}
-
-func threeWayPartition(nums []int, p int, r int) (int, int) {
-	lt, gt := p-1, r
-	pivot := nums[r]
-	i := p
-	for i < gt {
-		if nums[i] < pivot {
-			lt++
-			nums[i], nums[lt] = nums[lt], nums[i]
-			i++
-		} else if nums[i] > pivot {
-			gt--
-			nums[i], nums[gt] = nums[gt], nums[i]
-		} else {
-			i++
-		}
-	}
-	nums[r], nums[gt] = nums[gt], nums[r]
-	return lt, gt + 1
-}
-```
-
-
-
-
-
-```go
-func findKthLargest(nums []int, k int) int {
-    h := Constructor(nums)
-    for i := 0; i < k - 1; i++ {
-        h.ExtractMax()
-    }
-    return h.ExtractMax()
-}
-
-type MaxHeap struct {
-    nums []int
-    size int
-}
-
-func Constructor(nums []int) *MaxHeap {
-    h := &MaxHeap{nums: nums, size: len(nums)}
-    h.buildMaxHeap()
-    return h
-}
-
-func (h *MaxHeap) ExtractMax() int {
-    h.nums[0], h.nums[h.size - 1] = h.nums[h.size - 1], h.nums[0]
-    h.size--
-    h.maxHeapify(0)
-    return h.nums[h.size]
-}
-
-func (h *MaxHeap) buildMaxHeap() {
-    for i := h.size / 2 - 1; i >= 0; i-- {
-        h.maxHeapify(i)
-    }
-}
-
-func (h *MaxHeap) maxHeapify(i int) {
-    l := left(i)
-    r := right(i)
-    largest := i
-    if l < h.size && h.nums[l] > h.nums[largest] {
-        largest = l
-    }
-    if r < h.size && h.nums[r] > h.nums[largest] {
-        largest = r
-    }
-    if largest != i {
-        h.nums[i], h.nums[largest] = h.nums[largest], h.nums[i]
-        h.maxHeapify(largest)
-    }
-}
-
-func left(i int) int {
-    return i * 2 + 1
-}
-
-func right(i int) int {
-    return i * 2 + 2
-}
 ```
 
 

@@ -8,33 +8,31 @@
 * 事件委托 [A](https://zh.javascript.info/event-delegation)
 * 对闭包的理解？什么时候构成闭包？闭包的实现方法？闭包的优缺点？[A](https://vue3js.cn/interview/JavaScript/closure.html)
 * this有哪些使用场景？如何改变this的值？[A](https://juejin.cn/post/6844903470487568398)
-* call，apply，bind
-* 创建对象的多种方式
-* new 一个对象具体做了什么
-* 手写Ajax，XMLHttpRequest
-* 变量提升
-* 举例说明一个匿名函数的典型用例
-* document load和document DOMContentLoaded两个事件的区别
-* typeof能够得到哪些值
-* 什么是“use strict”,好处和坏处
-* 函数的作用域是什么？js 的作用域有几种？
-* JS如何实现重载和多态
-* 常用的数组api，字符串api
-* 给定一个元素获取它相对于视图窗口的坐标
-* 如何实现图片滚动懒加载
-* js 的字符串类型有哪些方法？ 正则表达式的函数怎么使用？
-* 深拷贝
-* 编写一个通用的事件监听函数
-* web端cookie的设置和获取
-* JavaScript 的事件流模型
-* navigator对象，location和history
-* js的垃圾回收机制
-* 内存泄漏的原因和场景
-* DOM事件的绑定的几种方式
-* DOM事件中target和currentTarget的区别
-* typeof 和 instanceof 区别，instanceof原理
-* js动画和css3动画比较
-* websocket的工作原理和机制。
-* 什么是函数柯里化？以及说一下JS的API有哪些应用到了函数柯里化的实现？
-* async/await 实现原理
-* ES6和node的commonjs模块化规范区别
+* call，apply，bind [A](https://vue3js.cn/interview/JavaScript/bind_call_apply.html)
+* 创建对象的多种方式 [A](https://juejin.cn/post/6844903616512278536)
+* new 一个对象具体做了什么 [A](https://vue3js.cn/interview/JavaScript/new.html)
+* **手写Ajax，XMLHttpRequest** [A](https://juejin.cn/post/6992604888165253156)
+* 变量提升  [A](https://juejin.cn/post/7007224479218663455)
+* 举例说明一个匿名函数的典型用例 [A](https://www.cnblogs.com/ranyonsue/p/10181035.html)
+* document load和document DOMContentLoaded两个事件的区别 [A](https://blog.csdn.net/weixin_40387601/article/details/80500235)
+* typeof能够得到哪些值 [A](https://blog.csdn.net/chunchun1230/article/details/109530911)
+* 什么是“use strict”,好处和坏处 [A](https://blog.csdn.net/weixin_40387601/article/details/80514358)
+* 函数的作用域是什么？js 的作用域有几种？[A](https://developer.mozilla.org/zh-CN/docs/Glossary/Scope)
+* JS如何实现重载和多态 [A](https://blog.csdn.net/weixin_40387601/article/details/80529351)
+* 常用的数组api，字符串api [A](https://juejin.cn/post/6989625706632183822)
+* 给定一个元素获取它相对于视图窗口的坐标 [A](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect)
+* 如何实现图片滚动懒加载 [A](https://juejin.cn/post/7080544007834730510)
+* **深拷贝** [A](https://juejin.cn/post/6844904042322198541)
+* 编写一个通用的事件监听函数 [A](https://juejin.cn/post/6844903807135006733)
+* cookie的设置和获取 [A](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie)
+* navigator对象，location和history [A](https://blog.csdn.net/qq_43472877/article/details/127260284)
+* js的垃圾回收机制 [A](https://juejin.cn/post/6981588276356317214)
+* 内存泄漏的原因和场景 [A](https://juejin.cn/post/6844904048961781774)
+* DOM事件中target和currentTarget的区别 [A](https://xjl271314.github.io/docs/javascript/target.html)
+* typeof 和 instanceof 区别，instanceof原理 [A](https://zhuanlan.zhihu.com/p/521832918)
+* js动画和css3动画比较 [A](https://juejin.cn/post/6997255364857036813)
+* websocket的工作原理和机制 [A](https://juejin.cn/post/7086021621542027271)
+* 什么是函数柯里化？以及说一下JS的API有哪些应用到了函数柯里化的实现？[A](https://zh.javascript.info/currying-partials)  bind
+* **手写Promise** [A](https://juejin.cn/post/6850037281206566919)
+* async/await 实现原理 [A](https://fairyly.github.io/interview/3.3.1%20Async---Await%E5%8E%9F%E7%90%86.html)
+* ES6和node的commonjs模块化规范区别 [A](https://ost.51cto.com/posts/3356)

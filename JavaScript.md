@@ -1,11 +1,13 @@
-* js的基本类型有哪些？引用类型有哪些？null和undefined的区别
-* 如何判断一个变量是Array类型？如何判断一个变量是Number类型？（都不止一种）
-* Object是引用类型嘛？引用类型和基本类型有什么区别？哪个是存在堆哪一个是存在栈上面的？
-* JS常见的dom操作api
-* 解释一下事件冒泡和事件捕获
-* 事件委托（手写例子），事件冒泡和捕获，如何阻止冒泡？如何组织默认事件？
-* 对闭包的理解？什么时候构成闭包？闭包的实现方法？闭包的优缺点？
-* this有哪些使用场景？跟C,Java中的this有什么区别？如何改变this的值？
+* js的基本类型有哪些？引用类型有哪些？[A](https://segmentfault.com/a/1190000006752076)
+* null和undefined的区别 [A](https://juejin.cn/post/6844903777506426893)
+* 如何判断一个变量是Array类型？[A](https://juejin.cn/post/7075928358088867871)  [A](https://blog.csdn.net/weixin_41977619/article/details/122928845)
+* 如何判断一个变量是Number类型？[A](https://www.cnblogs.com/guodefu909/p/4208758.html)
+* JS常见的dom操作api [A](https://www.haorooms.com/post/js_dom_api)
+* 解释一下事件冒泡和事件捕获 [A](https://zh.javascript.info/bubbling-and-capturing)
+* 如何阻止默认事件？[A](https://zh.javascript.info/default-browser-action)
+* 事件委托 [A](https://zh.javascript.info/event-delegation)
+* 对闭包的理解？什么时候构成闭包？闭包的实现方法？闭包的优缺点？[A](https://vue3js.cn/interview/JavaScript/closure.html)
+* this有哪些使用场景？如何改变this的值？[A](https://juejin.cn/post/6844903470487568398)
 * call，apply，bind
 * 创建对象的多种方式
 * new 一个对象具体做了什么

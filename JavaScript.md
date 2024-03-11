@@ -16,7 +16,7 @@
 * 举例说明一个匿名函数的典型用例 [A](https://www.cnblogs.com/ranyonsue/p/10181035.html)
 * document load和document DOMContentLoaded两个事件的区别 [A](https://blog.csdn.net/weixin_40387601/article/details/80500235)
 * typeof能够得到哪些值 [A](https://blog.csdn.net/chunchun1230/article/details/109530911)
-* 什么是“use strict”,好处和坏处 [A](https://blog.csdn.net/weixin_40387601/article/details/80514358)
+* "use strict"的作用 [A](https://blog.csdn.net/weixin_40387601/article/details/80514358)
 * 函数的作用域是什么？js 的作用域有几种？[A](https://developer.mozilla.org/zh-CN/docs/Glossary/Scope)
 * JS如何实现重载和多态 [A](https://blog.csdn.net/weixin_40387601/article/details/80529351)
 * 常用的数组api，字符串api [A](https://juejin.cn/post/6989625706632183822)

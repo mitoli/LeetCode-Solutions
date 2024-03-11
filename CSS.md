@@ -1,6 +1,7 @@
-* 盒模型，box-sizing
-* 如何实现水平居中和垂直居中
-* 说说position，display
+* 盒模型，box-sizing [See](https://vue3js.cn/interview/css/box.html#%E4%B8%89%E3%80%81ie-%E6%80%AA%E5%BC%82%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B)
+* 如何实现水平居中和垂直居中 [See](https://segmentfault.com/a/1190000014116655)
+* 说说position，display [See](https://blog.csdn.net/qq_27064559/article/details/81868787)
+
 * 浮动元素引起的问题和解决办法？绝对定位和相对定位，元素浮动后的display值
 * 清除浮动的原理
 * link和@import引入css的区别

@@ -168,20 +168,94 @@ class Promise {
     }
     
     then(onFulfilled, onRejected) {
-        if (this.status === FULFILLED) {
-            onFulfilled(this.value);
-        }
-        if (this.status === REJECTED) {
-            onRejected(this.reason);
-        }
-        if (this.status === PENDING) {
-            this.onResolvedCallbacks.push(() => {
-                onFulfilled(this.value);
+        onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : value => value;
+        onRejected = typeof onRejected === 'function' ? onRejected : reason => { throw new Error(reason) };
+        const self = this;
+        return new Promise((resolve, reject) => {
+            if (self.status === FULFILLED) {
+                try {
+                    const result = onFulfilled(self.value);
+                    result instanceof Promise ? result.then(resolve, reject) : resolve(result);
+                } catch(e) {
+                    reject(e);
+                }
+            }
+            
+            if (self.status === REJECTED) {
+                try {
+                    const result = onRejected(self.reason);
+                    result instanceof Promise ? result.then(resolve, reject) : resolve(result);
+                } catch(e) {
+                    reject(e);
+                }
+            }
+            
+            if (self.status === PENDING) {
+                self.onFulfilledCallbacks.push(() => {
+                    try {
+                        const result = onFulfilled(self.value);
+                        result instanceof Promise ? result.then(resolve, reject) : resolve(result);
+                    } catch(e) {
+                        reject(e);
+                    }
+                });
+                self.onRejectedCallbacks.push(() => {
+                    try {
+                        const result = onRejected(self.reason);
+                        result instanceof Promise ? result.then(resolve, reject) : resolve(result);
+                    } catch(e) {
+                        reject(e);
+                    }
+                });
+            }
+        });
+    }
+    
+    catch(onRejected) {
+        return this.then(null, onRejected);
+    }
+    
+    static resolve(value) {
+        if (value instanceof Promise) {
+            return value;
+        } else {
+            return new Promise((resolve, reject) => {
+                resolve(value);
             });
-            this.onRejectedCallbacks.push(() => {
-                onRejected(this.reason);
-            });
         }
+    }
+    
+    static reject(reason) {
+        return new Promise((resolve, reject) => {
+            reject(reason);
+        });
+    }
+    
+    static all(arr) {
+        const n = arr.length;
+        const values = new Array(n);
+        let count = 0;
+        return new Promise((resolve, reject) => {
+            for (let i = 0; i < n; i++) {
+                Promise.resolve(arr[i]).then((val) => {
+                    values[i] = val;
+                    count++;
+                    if (count === n) {
+                        resolve(values);
+                    }
+                }, (err) => {
+                    reject(err);
+                });
+            }
+        });
+    }
+    
+    static race(arr) {
+        return new Promise((resolve, reject) => {
+            arr.forEach((p) => {
+                Promise.resolve(p).then(val => resolve(val), err => reject(err));
+            });
+        });
     }
 }
 ```
@@ -219,4 +293,8 @@ const p2 = new Promise((resolve, reject) => {
 ```
 
 
+
+* 数组扁平化
+* 函数柯里化
+* 数组去重
 

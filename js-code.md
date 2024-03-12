@@ -17,15 +17,15 @@ function objectToString(obj) {
     return res.join('&');
 }
 
-function ajax({ type = 'get', url, data = {}, dataType = 'json', isAsync = true }) {
+function ajax({ type = 'get', url, data = {}, dataType = 'json' }) {
     const xhr = createXHR();
     const stringData = objectToString(data);
     return new Promise((reolve, reject) => {
         if (type === 'get') {
-            xhr.open(type, url + '?' + stringData, isAsync);
+            xhr.open(type, url + '?' + stringData);
             xhr.send();
         } else {
-            xhr.open(type, url, isAsync);
+            xhr.open(type, url);
             xhr.setReqeustHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send(stringData);
         }

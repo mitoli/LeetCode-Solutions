@@ -11,7 +11,7 @@
 * call，apply，bind [A](https://vue3js.cn/interview/JavaScript/bind_call_apply.html)
 * 创建对象的多种方式 [A](https://juejin.cn/post/6844903616512278536)
 * new 一个对象具体做了什么 [A](https://vue3js.cn/interview/JavaScript/new.html)
-* **手写Ajax，XMLHttpRequest** [A](https://juejin.cn/post/6992604888165253156)
+* **手写Ajax，XMLHttpRequest** [A](https://juejin.cn/post/6992604888165253156)  [A](https://cloud.tencent.com/developer/article/2070572)
 * 变量提升  [A](https://juejin.cn/post/7007224479218663455)
 * 举例说明一个匿名函数的典型用例 [A](https://www.cnblogs.com/ranyonsue/p/10181035.html)
 * document load和document DOMContentLoaded两个事件的区别 [A](https://blog.csdn.net/weixin_40387601/article/details/80500235)

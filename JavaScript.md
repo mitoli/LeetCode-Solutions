@@ -22,7 +22,7 @@
 * 常用的数组api，字符串api [A](https://juejin.cn/post/6989625706632183822)
 * 给定一个元素获取它相对于视图窗口的坐标 [A](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect)
 * 如何实现图片滚动懒加载 [A](https://juejin.cn/post/7080544007834730510)
-* **深拷贝** [A](https://juejin.cn/post/6844904042322198541)
+* **深拷贝** [A](https://juejin.cn/post/6844904042322198541) [A](https://vue3js.cn/interview/JavaScript/copy.html)
 * 编写一个通用的事件监听函数 [A](https://juejin.cn/post/6844903807135006733)
 * cookie的设置和获取 [A](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie)
 * navigator对象，location和history [A](https://blog.csdn.net/qq_43472877/article/details/127260284)

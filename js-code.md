@@ -95,5 +95,128 @@ function deepClone(obj, hash = new WeakMap()) {
 
 
 
+```javascript
+const data = {
+  age: 18,
+  name: 'Leo',
+  education: ['小学', '初中', '高中', '大学', undefined, null],
+  likesFood: new Set(['fish', 'banana']),
+  friends: [
+    { name: 'Marry', sex: 'woman' },
+    { name: 'Tina', sex: 'woman' },
+    { name: 'Jerry', sex: 'man' }],
+  work: {
+    time: '2019',
+    project: { name: 'test', obtain: ['css', 'html', 'js'] }
+  },
+  play: function () {
+    console.log('玩滑板');
+  }
+};
+
+deepClone(data);
+
+const data2 = {
+  name: 'foo',
+  child: null,
+};
+data2.child = data2;
+
+deepClone(data2);
+```
+
+
+
+* 手写Promise
+
+
+
+```javascript
+const PENDING = 'PENDING';
+const FULFILLED = 'FULFILLED';
+const REJECTED = 'REJECTED';
+
+class Promise {
+    constructor(executor) {
+        this.status = PENDING;
+        this.value = undefined;
+        this.reason = undefined;
+        this.onResolvedCallbacks = [];
+        this.onRejectedCallbacks = [];
+        
+        const resolve = (value) => {
+            if (this.status === PENDING) {
+                this.status = FULFILLED;
+                this.value = value;
+                this.onResolvedCallbacks.forEach(fn => fn());
+            }
+        };
+        
+        const reject = (reason) => {
+            if (this.status === PENDING) {
+                this.status = REJECTED;
+                this.reason = reason;
+                this.onRejectedCallbacks.forEach(fn => fn());
+            }
+        };
+        
+        try {
+            executor(resolve, reject);
+        } catch (e) {
+            reject(e);
+        }
+    }
+    
+    then(onFulfilled, onRejected) {
+        if (this.status === FULFILLED) {
+            onFulfilled(this.value);
+        }
+        if (this.status === REJECTED) {
+            onRejected(this.reason);
+        }
+        if (this.status === PENDING) {
+            this.onResolvedCallbacks.push(() => {
+                onFulfilled(this.value);
+            });
+            this.onRejectedCallbacks.push(() => {
+                onRejected(this.reason);
+            });
+        }
+    }
+}
+```
+
+
+
+```javascript
+const p1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('成功');
+  }, 1000);
+})
+  .then(
+    (data) => {
+      console.log('success', data);
+    },
+    (err) => {
+      console.log('failed', err);
+    }
+  );
+
+const p2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    reject('失败');
+  }, 1000);
+})
+  .then(
+    (data) => {
+      console.log('success', data);
+    },
+    (err) => {
+      console.log('failed', err);
+    }
+  );
+```
+
 
 

@@ -1,5 +1,5 @@
-* 跨域，为什么JS会对跨域做出限制
-* 前端安全：xss，csrf...
+* 跨域的原因和解决方案 [A](https://cloud.tencent.com/developer/article/1698759)
+* 前端安全 [A](https://tech.meituan.com/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8.html)
 * 浏览器怎么加载页面的？script脚本阻塞有什么解决方法？defer和async的区别？
 * 浏览器强缓存和协商缓存
 * 浏览器的全局变量有哪些

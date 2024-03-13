@@ -36,3 +36,4 @@
 * **手写Promise** [A](https://juejin.cn/post/6850037281206566919)
 * async/await 实现原理 [A](https://fairyly.github.io/interview/3.3.1%20Async---Await%E5%8E%9F%E7%90%86.html)
 * ES6和node的commonjs模块化规范区别 [A](https://ost.51cto.com/posts/3356)
+* 事件循环机制，微任务和宏任务 [A](https://juejin.cn/post/6873424205791100942)

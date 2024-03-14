@@ -37,3 +37,6 @@
 * async/await 实现原理 [A](https://fairyly.github.io/interview/3.3.1%20Async---Await%E5%8E%9F%E7%90%86.html)
 * ES6和node的commonjs模块化规范区别 [A](https://ost.51cto.com/posts/3356)
 * 事件循环机制，微任务和宏任务 [A](https://juejin.cn/post/6873424205791100942)
+* 对类数组对象的理解，如何转化为数组 [A](https://juejin.cn/post/7019602727722287135) [A](https://cloud.tencent.com/developer/article/1903785)
+* 箭头函数和普通函数的区别 [A](https://juejin.cn/post/6844903805960585224)
+* 如何安全地获取undefined值？ [A](https://zhuanlan.zhihu.com/p/572897014)

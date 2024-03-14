@@ -2,9 +2,9 @@
 * 如何实现水平居中和垂直居中 [A](https://segmentfault.com/a/1190000014116655)
 * 说说position，display [A](https://blog.csdn.net/qq_27064559/article/details/81868787)
 
-* 浮动元素引起的问题和解决办法？[A](https://blog.csdn.net/December_shi/article/details/108490784)
+* 浮动元素引起的问题和解决办法？[A](https://www.itcast.cn/news/20240126/1406227832.shtml)
 * 绝对定位和相对定位，元素浮动后的display值 [A](https://blog.csdn.net/December_shi/article/details/108490784)
-* 清除浮动的原理 [A](https://segmentfault.com/a/1190000039658450)
+* 清除浮动的原理 [A](https://juejin.cn/post/6844903605862940685)
 * link和@import引入css的区别 [A](https://www.itcast.cn/news/20210924/15344245925.shtml)
 * 解释一下css3的flexbox，以及适用场景 [A](https://blog.51cto.com/liuhao9999/5259141)
 * inline和inline-block的区别 [A](https://www.cnblogs.com/rdchen/p/14025566.html)

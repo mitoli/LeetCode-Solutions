@@ -1,32 +1,25 @@
 * 跨域的原因和解决方案 [A](https://cloud.tencent.com/developer/article/1698759)
 * 前端安全 [A](https://tech.meituan.com/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8.html)
-* 浏览器怎么加载页面的？script脚本阻塞有什么解决方法？defer和async的区别？
-* 浏览器强缓存和协商缓存
-* 浏览器的全局变量有哪些
-* 浏览器同一时间能够从一个域名下载多少资源
-* web存储、cookies、localstroge等的使用和区别
-* 浏览器的内核
-* 如何实现缓存机制？（从200缓存，到cache到etag再到）
-* 说一下200和304的理解和区别
-* 什么是预加载、懒加载
-* 一个 XMLHttpRequest 实例有多少种状态？
-* 浏览器渲染过程
-* 拆解url的各部分
-* HTTP协议头含有哪些重要的部分，HTTP状态码
-* tcp的三次握手和四次挥手
-* tcp与udp的区别
-* get和post的区别
-* 对AMD,CMD,CommonJS有没有了解?
-* 单页面应用首屏显示比较慢，原因是什么？有什么解决方案？
-* 一个TCP连接能发出几个HTTP请求？
-* 什么是同源策略
-* 浏览器的渲染过程
-* 浏览器的缓存机制
-* 说说BFC是什么，能解决什么问题
-* 当浏览器地址栏输入一个url到页面展现，这个过程
-* Doctype作用? 严格模式与混杂模式如何区分
-* HTML5有哪些新特性、移除了哪些元素？
-* 请列举几种清除浮动的方法(至少两种)?
-* 哪些性能优化的方法
-* 重绘与回流
-* localStorage 与 sessionStorage 与cookie的区别总结
+* 浏览器怎么加载页面的？[A](https://juejin.cn/post/6844903829251555341)
+* script脚本阻塞有什么解决方法？defer和async的区别？[A](https://juejin.cn/post/6916339020406505485)
+* 浏览器强缓存和协商缓存 [A](https://juejin.cn/post/6844903838768431118)
+* 浏览器同一时间能够从一个域名下载多少资源 [A](https://juejin.cn/s/chrome%E5%90%8C%E6%97%B6%E8%AF%B7%E6%B1%826%E4%B8%AA%E8%AF%B7%E6%B1%82)
+* 浏览器的内核 [A](https://zhuanlan.zhihu.com/p/99777087)
+* 说一下200和304的理解和区别 [A](https://blog.csdn.net/chenhyc/article/details/106419074)
+* 什么是预加载、懒加载 [A](https://juejin.cn/post/7106294843197882381)
+* 一个 XMLHttpRequest 实例有多少种状态？[A](https://blog.csdn.net/tracymm19891990/article/details/8703095)
+* 拆解url的各部分 [A](https://juejin.cn/post/7097224999898972167)
+* HTTP协议头含有哪些重要的部分 [A](https://blog.csdn.net/qq_42218123/article/details/80664302)
+* 常见的 HTTP 状态码有哪些 [A](https://www.51cto.com/article/710512.html)
+* tcp的三次握手和四次挥手 [A](https://github.com/mitoli/FAQ/blob/master/docs/network.md#tcp-%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E7%BB%88%E6%AD%A2)
+* tcp与udp的区别 [A](https://github.com/mitoli/FAQ/blob/master/docs/network.md#%E8%AF%B4%E8%AF%B4-tcp-%E5%92%8C-udp-%E7%9A%84%E5%8C%BA%E5%88%AB)
+* get和post的区别 [A](https://www.cnblogs.com/vipstone/p/16545771.html)
+* 单页面应用首屏显示比较慢，原因是什么？有什么解决方案？[A](https://cloud.tencent.com/developer/article/1794248)
+* 一个TCP连接能发出几个HTTP请求？[A](https://zhuanlan.zhihu.com/p/61423830)
+* 说说BFC是什么，能解决什么问题 [A](https://juejin.cn/post/6950082193632788493)
+* 当浏览器地址栏输入一个url到页面展现，这个过程 [A](https://github.com/mitoli/FAQ/blob/master/docs/network.md#%E4%BB%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%B0%E5%9D%80%E6%A0%8F%E8%BE%93%E5%85%A5-url-%E5%88%B0%E6%98%BE%E7%A4%BA%E4%B8%BB%E9%A1%B5%E7%9A%84%E8%BF%87%E7%A8%8B)
+* Doctype作用? 严格模式与混杂模式如何区分 [A](https://blog.csdn.net/sunhl951/article/details/79763727)
+* HTML5有哪些新特性、移除了哪些元素？[A](https://juejin.cn/post/7246206157899595834)
+* 请列举几种清除浮动的方法(至少两种)? [A](https://juejin.cn/post/6844903504545316877)
+* 重绘与回流 [A](https://juejin.cn/post/6844903569087266823)
+* localStorage、sessionStorage、cookie的区别 [A](https://blog.csdn.net/weixin_46920847/article/details/123677170)

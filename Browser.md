@@ -1,7 +1,7 @@
 * 跨域的原因和解决方案 [A](https://cloud.tencent.com/developer/article/1698759)
 * 前端安全 [A](https://tech.meituan.com/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8.html)
 * 浏览器怎么加载页面的？[A](https://juejin.cn/post/6844903829251555341)
-* script脚本阻塞有什么解决方法？defer和async的区别？[A](https://juejin.cn/post/6916339020406505485)
+* script脚本阻塞有什么解决方法？async和defer的区别？[A](https://juejin.cn/post/6916339020406505485)
 * 浏览器强缓存和协商缓存 [A](https://juejin.cn/post/6844903838768431118)
 * 浏览器同一时间能够从一个域名下载多少资源 [A](https://juejin.cn/s/chrome%E5%90%8C%E6%97%B6%E8%AF%B7%E6%B1%826%E4%B8%AA%E8%AF%B7%E6%B1%82)
 * 浏览器的内核 [A](https://zhuanlan.zhihu.com/p/99777087)
